@@ -1,0 +1,56 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:filetype=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem          1.0
+PortGroup           cmake 1.1
+PortGroup           cxx11 1.1
+PortGroup           github 1.0
+PortGroup           qt5 1.0
+
+platforms           darwin macosx
+categories          science comms
+license             GPL-2.0
+maintainers         {@ra1nb0w irh.it:rainbow} openmaintainer
+
+description         software dab decoder for use with sdrplay, dabstick, airspy or hackrf
+
+long_description    Qt-DAB is a Software for listening to terrestrial \
+    Digital Audio Broadcasting, DAB and DAB+. It is the successor of \
+    both DAB-rpi and sdr-j-DAB, two former programs by the same author.
+
+homepage            http://www.sdr-j.tk
+
+github.setup        JvanKatwijk qt-dab 2.5
+checksums           rmd160  1b22f2d136807215f266196f6ee58eda73ce09c6 \
+    sha256  890b14345f8d3e743620b8cf7fc31066d306f4c7961cff9983b7c5efa0c034ac \
+    size    1957704
+revision            0
+
+depends_lib-append \
+    port:portaudio \
+    port:fftw-3 \
+    port:faad2 \
+    port:zlib \
+    port:libsndfile \
+    port:libsamplerate
+
+variant airspy description {Enable airspy devices} {
+    depends_lib-append     port:airspy
+    configure.args-append  -DAIRSPY=YES
+}
+
+variant sdrplay description {Enable sdrplay devices} {
+    depends_lib-append     port:SDRplay
+    configure.args-append  -DSDRPLAY=YES
+}
+
+variant rtlsdr description {Enable rtl-sdr devices} {
+    depends_lib-append     port:rtl-sdr
+    configure.args-append  -DRTLSDR=YES -DRTLTCP=YES
+}
+
+variant hackrf description {Enable HackRF device} {
+    depends_lib-append     port:hackrf
+    configure.args-append  -DHACKRF=YES
+}
+
+default_variants +rtlsdr
