@@ -1,0 +1,73 @@
+diff --git CMakeLists.txt CMakeLists.txt
+index 649c5209e..d1fd30094 100644
+--- CMakeLists.txt
++++ CMakeLists.txt
+@@ -141,7 +141,7 @@ attach a debugger which will then receive the console output inside its console.
+ # install locations
+ #
+ 
+-if (APPLE)
++if (FALSE)
+   set (CMAKE_INSTALL_BINDIR ${CMAKE_PROJECT_NAME}.app/Contents/MacOS)
+   set (CMAKE_INSTALL_DATAROOTDIR ${CMAKE_PROJECT_NAME}.app/Contents/Resources)
+ endif ()
+@@ -733,7 +733,7 @@ set (PALETTE_FILES
+   Palettes/ZL1FZ.pal
+ )
+ 
+-if (APPLE)
++if (FALSE)
+   set (WSJTX_ICON_FILE ${CMAKE_PROJECT_NAME}.icns)
+   set (ICONSRCS
+     icons/Darwin/${CMAKE_PROJECT_NAME}.iconset/icon_16x16.png
+@@ -794,7 +794,7 @@ endif ()
+ #
+ # decide on platform specifc packing and fixing up
+ #
+-if (APPLE)
++if (FALSE)
+   set (WSJTX_BUNDLE_VERSION ${wsjtx_VERSION})
+ 
+   # make sure CMAKE_INSTALL_PREFIX ends in /
+@@ -1508,7 +1508,7 @@ endif (UNIX)
+ #
+ install (TARGETS wsjtx
+   RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT runtime
+-  BUNDLE DESTINATION . COMPONENT runtime
++  BUNDLE DESTINATION ${CMAKE_INSTALL_BINDIR} COMPONENT runtime
+   )
+ 
+ # install (TARGETS wsjtx_udp EXPORT udp
+@@ -1596,7 +1596,7 @@ install (DIRECTORY
+ #
+ # Mac installer files
+ #
+-if (APPLE)
++if (FALSE)
+     install (FILES
+         Darwin/ReadMe.txt
+         Darwin/com.wsjtx.sysctl.plist
+@@ -1664,7 +1664,7 @@ endif (NOT WIN32 AND NOT APPLE)
+ #
+ # bundle fixup only done in non-Debug configurations
+ #
+-if (NOT is_debug_build)
++if (FALSE)
+ 
+   get_target_property (QtCore_location Qt5::Core LOCATION)
+   get_filename_component (QtCore_location ${QtCore_location} PATH)
+@@ -1842,7 +1842,7 @@ set (CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}${BUILD_TYPE_REVISION}
+ 
+ if (WIN32)
+   set (CPACK_GENERATOR "NSIS")
+-elseif (APPLE)
++elseif (FALSE)
+   set (CPACK_GENERATOR "DragNDrop")
+ else ()
+   find_program (DPKG_BUILDER dpkg-buildpackage DOC "Debian package builder")
+@@ -1883,4 +1883,4 @@ configure_file ("${PROJECT_SOURCE_DIR}/CMakeCPackOptions.cmake.in"
+   "${PROJECT_BINARY_DIR}/CMakeCPackOptions.cmake" @ONLY)
+ set (CPACK_PROJECT_CONFIG_FILE "${PROJECT_BINARY_DIR}/CMakeCPackOptions.cmake")
+ 
+-include (CPack)
++#include (CPack)
